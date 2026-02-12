@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
 
 class AdminProductController extends Controller
 {
@@ -26,9 +25,9 @@ class AdminProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
-            'category' => 'required|string',
-            'stock' => 'required|integer|min:0',
-            'image' => 'nullable|image|max:2048',
+            'category' => 'required|string|max:100',
+            'quantity' => 'required|integer|min:0',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
@@ -37,8 +36,7 @@ class AdminProductController extends Controller
 
         Product::create($validated);
 
-        return redirect()->route('admin.products.index')
-            ->with('success', 'Product added successfully');
+        return redirect()->route('admin.products.index')->with('success', 'Product added successfully ✅');
     }
 
     public function edit(Product $product)
@@ -52,13 +50,13 @@ class AdminProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
-            'category' => 'required|string',
-            'stock' => 'required|integer|min:0',
-            'image' => 'nullable|image|max:2048',
+            'category' => 'required|string|max:100',
+            'quantity' => 'required|integer|min:0',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
-            if ($product->image) {
+            if ($product->image && Storage::disk('public')->exists($product->image)) {
                 Storage::disk('public')->delete($product->image);
             }
             $validated['image'] = $request->file('image')->store('products', 'public');
@@ -66,19 +64,17 @@ class AdminProductController extends Controller
 
         $product->update($validated);
 
-        return redirect()->route('admin.products.index')
-            ->with('success', 'Product updated successfully');
+        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully ✅');
     }
 
     public function destroy(Product $product)
     {
-        if ($product->image) {
+        if ($product->image && Storage::disk('public')->exists($product->image)) {
             Storage::disk('public')->delete($product->image);
         }
 
         $product->delete();
 
-        return redirect()->route('admin.products.index')
-            ->with('success', 'Product deleted successfully');
+        return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully ✅');
     }
 }

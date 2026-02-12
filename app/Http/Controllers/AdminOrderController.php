@@ -8,8 +8,7 @@ class AdminOrderController extends Controller
 {
     public function index()
     {
-        return view('admin.orders.index', [
-            'orders' => Order::latest()->get()
-        ]);
+        $orders = Order::latest()->get();
+        return view('admin.orders.index', compact('orders'));
     }
 }

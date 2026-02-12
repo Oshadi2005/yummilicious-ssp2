@@ -6,25 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->integer('quantity')->default(0)->after('category'); // Current stock
-            $table->integer('sold')->default(0)->after('quantity');     // Total sold
-        });
+        // ✅ Do nothing (because quantity & sold already exist in create_products_table)
+        // Keep this migration so Laravel doesn't get confused.
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('quantity');
-            $table->dropColumn('sold');
-        });
+        // ✅ Do nothing
     }
 };

@@ -8,33 +8,42 @@ use Livewire\Component;
 class AddToCartButton extends Component
 {
     public int $productId;
-    public int $stock = 0;
+    public int $available = 0; // ✅ renamed
     public int $quantity = 1;
 
     protected const CART_SESSION_KEY = 'yummilicious_cart';
 
-    // Add product to session cart
-    public function addToCart()
+    public function mount(int $productId): void
+    {
+        $this->productId = $productId;
+
+        $product = Product::find($productId);
+        $this->available = (int) ($product?->quantity ?? 0); // ✅ safe
+    }
+
+    public function addToCart(): void
     {
         $product = Product::find($this->productId);
 
-        if (!$product || $this->quantity < 1) {
-            return;
-        }
+        if (!$product) return;
 
-        // Get current cart from session
+        $available = (int) ($product->quantity ?? 0);
+
+        if ($available <= 0) return;
+
+        $qty = max(1, (int)$this->quantity);
+
         $cart = session()->get(self::CART_SESSION_KEY, []);
+        $currentQty = (int) ($cart[$this->productId] ?? 0);
 
-        $currentQty = $cart[$this->productId] ?? 0;
-        $cart[$this->productId] = min($currentQty + $this->quantity, $product->stock);
+        $cart[$this->productId] = min($currentQty + $qty, $available);
 
         session()->put(self::CART_SESSION_KEY, $cart);
 
-        // Dispatch event to update navbar or other components
         $this->dispatch('cartUpdated');
 
-        // Reset quantity to 1 after adding
         $this->quantity = 1;
+        $this->available = $available;
     }
 
     public function render()

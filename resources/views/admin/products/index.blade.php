@@ -1,58 +1,70 @@
-<x-app-layout>
-    <main class="max-w-6xl mx-auto p-6">
+@extends('layouts.admin')
 
-        <!-- Page Title -->
-        <section class="bg-pink-200 text-center py-6 rounded-lg mb-6">
-            <h2 class="text-3xl font-bold text-gray-800">Order Online</h2>
-        </section>
+@section('content')
+    <div class="flex items-center justify-between mb-6">
+        <h2 class="text-3xl font-extrabold text-pink-600">🍰 Products</h2>
 
-        <!-- Feedback Message -->
-        @if(session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-6">
-                {{ session('success') }}
-            </div>
-        @endif
+        <a href="{{ route('admin.products.create') }}"
+           class="px-4 py-2 rounded-lg bg-pink-500 text-white font-semibold hover:bg-pink-600">
+            + Add Product
+        </a>
+    </div>
 
-        <!-- Products grouped by category -->
-        @php
-            $categories = $products->groupBy('category');
-        @endphp
+    @if(session('success'))
+        <div class="mb-6 rounded-lg border border-green-200 bg-green-50 p-4 text-green-700">
+            {{ session('success') }}
+        </div>
+    @endif
 
-        @foreach($categories as $category => $items)
-            <section class="bg-white p-6 rounded-xl shadow-md mb-10">
-                <h3 class="text-xl font-bold text-center text-pink-600 mb-6">{{ $category }}</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-                    @foreach($items as $product)
-                        <div class="text-center border p-3 rounded-lg shadow-sm hover:shadow-md transition">
+    <div class="bg-white rounded-2xl shadow border border-pink-100 overflow-hidden">
+        <table class="w-full text-sm">
+            <thead class="bg-pink-100 text-pink-900">
+                <tr>
+                    <th class="p-4 text-left">Image</th>
+                    <th class="p-4 text-left">Name</th>
+                    <th class="p-4 text-left">Category</th>
+                    <th class="p-4 text-left">Price</th>
+                    <th class="p-4 text-left">Quantity</th>
+                    <th class="p-4 text-left">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($products as $product)
+                    <tr class="border-t">
+                        <td class="p-4">
                             @if($product->image && Storage::disk('public')->exists($product->image))
-                                <img src="{{ asset('storage/' . $product->image) }}" 
-                                     alt="{{ $product->name }}" 
-                                     class="rounded-lg shadow-md h-40 w-full object-cover mb-3">
+                                <img src="{{ asset('storage/'.$product->image) }}"
+                                     class="h-12 w-12 rounded-lg object-cover" />
                             @else
-                                <div class="w-full h-40 bg-gray-200 flex items-center justify-center mb-3 text-sm text-gray-500">
-                                    No Image
-                                </div>
+                                <div class="h-12 w-12 rounded-lg bg-gray-100 flex items-center justify-center text-xs text-gray-500">No</div>
                             @endif
-                            <p class="mt-2 font-semibold">{{ $product->name }}</p>
-                            <p class="text-pink-600 font-bold mb-2">LKR {{ number_format($product->price, 2) }}</p>
+                        </td>
+                        <td class="p-4 font-semibold">{{ $product->name }}</td>
+                        <td class="p-4">{{ $product->category }}</td>
+                        <td class="p-4 font-bold text-pink-700">LKR {{ number_format($product->price, 2) }}</td>
+                        <td class="p-4">{{ $product->quantity }}</td>
+                        <td class="p-4 flex gap-2">
+                            <a href="{{ route('admin.products.edit', $product) }}"
+                               class="px-3 py-1 rounded-lg bg-pink-100 text-pink-800 font-semibold hover:bg-pink-200">
+                                Edit
+                            </a>
 
-                            <form action="{{ route('cart.add') }}" method="POST" class="flex flex-col items-center gap-2">
+                            <form action="{{ route('admin.products.destroy', $product) }}" method="POST"
+                                  onsubmit="return confirm('Delete this product?')">
                                 @csrf
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                <div class="flex items-center space-x-2">
-                                    <label for="qty_{{ $product->id }}" class="text-sm text-gray-600">Qty:</label>
-                                    <input type="number" id="qty_{{ $product->id }}" name="quantity" value="1" min="1" 
-                                           class="w-16 px-2 py-1 border rounded text-center">
-                                </div>
-                                <button type="submit" class="bg-pink-500 text-white px-3 py-1 rounded-lg hover:bg-pink-600 transition">
-                                    Add to Cart
+                                @method('DELETE')
+                                <button class="px-3 py-1 rounded-lg bg-red-100 text-red-700 font-semibold hover:bg-red-200">
+                                    Delete
                                 </button>
                             </form>
-                        </div>
-                    @endforeach
-                </div>
-            </section>
-        @endforeach
-
-    </main>
-</x-app-layout>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="6" class="p-8 text-center text-gray-500">No products found.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+@endsection

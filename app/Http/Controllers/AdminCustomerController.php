@@ -8,8 +8,7 @@ class AdminCustomerController extends Controller
 {
     public function index()
     {
-        return view('admin.customers.index', [
-            'customers' => User::where('role', 'customer')->latest()->get()
-        ]);
+        $customers = User::where('role', 'customer')->latest()->get();
+        return view('admin.customers.index', compact('customers'));
     }
 }
