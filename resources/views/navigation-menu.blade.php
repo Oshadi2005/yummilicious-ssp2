@@ -4,15 +4,15 @@
     $isAdminUser = auth()->check() && method_exists(auth()->user(), 'isAdmin') && auth()->user()->isAdmin();
 @endphp
 
-<nav x-data="{ open: false }" class="bg-pink-100/95 border-b border-pink-200 shadow-sm">
+<nav x-data="{ open: false }" class="bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ $isAdminUser ? route('admin.dashboard') : route('home') }}" class="flex items-center gap-2">
-                        <x-application-mark class="block h-9 w-auto" />
-                        <span class="hidden sm:inline text-lg font-semibold text-pink-700">Yummilicious</span>
+                        <x-application-mark class="block h-9 w-auto opacity-90" />
+                        <span class="hidden sm:inline text-2xl font-bold tracking-wide text-gray-900" style="font-family: 'Playfair Display', serif;">Yummilicious</span>
                     </a>
                 </div>
 
@@ -94,10 +94,10 @@
 
                 {{-- Guest: Login/Register --}}
                 @guest
-                    <a href="{{ route('login') }}" class="text-sm text-pink-700 hover:text-pink-800 font-medium">Log in</a>
+                    <a href="{{ route('login') }}" class="text-[11px] uppercase tracking-[0.2em] font-bold text-gray-900 hover:text-rose-500 transition-colors">Log in</a>
                     @if(Route::has('register'))
                         <a href="{{ route('register') }}"
-                           class="inline-flex items-center px-4 py-2 bg-pink-500 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 transition">
+                           class="inline-flex items-center px-5 py-2.5 bg-gray-900 border border-transparent rounded-sm font-bold text-[11px] text-white uppercase tracking-[0.2em] hover:bg-rose-900 focus:outline-none transition-colors duration-500 shadow-sm">
                             Register
                         </a>
                     @endif
@@ -153,7 +153,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-pink-50/95 border-t border-pink-200">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-[#FAFAFA]/95 backdrop-blur-md border-t border-gray-100 shadow-inner">
         <div class="pt-2 pb-3 space-y-1 px-4">
 
             {{-- ✅ ADMIN MOBILE NAV --}}

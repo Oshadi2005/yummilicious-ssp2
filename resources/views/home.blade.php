@@ -1,192 +1,104 @@
-{{-- Yummilicious bakery homepage (Elegant + Cute + Premium + Soft Luxury Pink) --}}
+{{-- Yummilicious bakery homepage (Luxury, Elegant, Artisan Aesthetic) --}}
 <x-app-layout>
-    {{-- HERO --}}
-    <section class="relative w-full min-h-[520px] md:min-h-[640px] overflow-hidden bg-pink-50">
-        <img
-            src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=2000&q=80"
-            alt="Fresh cake being decorated"
-            class="absolute inset-0 w-full h-full object-cover"
-        />
-        <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/25 to-pink-50/95"></div>
+    {{-- Typography setup for elegant serif fonts --}}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+        .font-serif-elegant { font-family: 'Playfair Display', serif; }
+        .font-body-elegant { font-family: 'Lora', serif; }
+    </style>
 
-        <div class="relative max-w-7xl mx-auto px-6 pt-20 md:pt-28 pb-16 md:pb-24">
-            <div class="max-w-2xl text-white">
-                <p class="inline-flex items-center gap-2 bg-white/15 border border-white/25 px-4 py-2 rounded-full text-sm backdrop-blur">
-                    <span>🍰</span>
-                    Freshly baked • Handmade with love
-                </p>
-
-                <h1 class="mt-5 text-4xl md:text-6xl font-extrabold leading-tight drop-shadow">
-                    Sweet moments, <span class="text-pink-200">beautifully baked</span>
+    {{-- HERO SECTION - Editorial Split Layout --}}
+    <section class="relative w-full min-h-[90vh] flex flex-col lg:flex-row bg-[#FAFAFA]">
+        <div class="relative w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-20 z-10">
+            <div class="max-w-xl">
+                <p class="uppercase tracking-[0.3em] text-[11px] font-bold text-rose-800 mb-6 bg-rose-100 inline-block px-4 py-1">Artisan Bakery & Patisserie</p>
+                <h1 class="text-5xl md:text-7xl font-serif-elegant font-bold text-gray-900 leading-tight mb-6">
+                    Elevating the <br/><span class="text-rose-400 italic font-medium">art of baking</span>
                 </h1>
-
-                <p class="mt-4 text-base md:text-lg text-white/90 leading-relaxed">
-                    Cakes, brownies, cookies, cupcakes and wedding treats — crafted with quality ingredients and a luxury finish.
+                <p class="font-body-elegant text-gray-500 text-lg md:text-xl leading-relaxed mb-10">
+                    Handcrafted cakes, delicate macarons, and artisan treats crafted with the finest ingredients and an eye for unparalleled elegance.
                 </p>
-
-                <div class="mt-7 flex flex-col sm:flex-row gap-3">
-                    <a href="{{ route('products.index') }}"
-                       class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-semibold shadow-lg shadow-pink-500/30 transition">
-                        Order Online
-                        <span class="ml-2">🛒</span>
+                
+                <div class="flex flex-col sm:flex-row gap-5">
+                    <a href="{{ route('products.index') }}" class="inline-flex justify-center items-center px-8 py-4 bg-gray-900 text-white font-medium tracking-wide hover:bg-rose-900 transition-colors duration-500 rounded-sm">
+                        Explore Collection
                     </a>
-
-                    <a href="{{ route('about') }}"
-                       class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-white/15 hover:bg-white/20 border border-white/25 text-white font-semibold backdrop-blur transition">
-                        About Us
-                        <span class="ml-2">✨</span>
+                    <a href="{{ route('about') }}" class="inline-flex justify-center items-center px-8 py-4 border border-gray-300 text-gray-900 font-medium tracking-wide hover:border-gray-900 transition-colors duration-500 rounded-sm">
+                        Our Story
                     </a>
-                </div>
-
-                <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-lg">
-                    <div class="bg-white/10 border border-white/20 rounded-2xl p-4 backdrop-blur">
-                        <p class="text-sm text-white/85">Delivery</p>
-                        <p class="font-semibold">Fast & Fresh 🚚</p>
-                    </div>
-                    <div class="bg-white/10 border border-white/20 rounded-2xl p-4 backdrop-blur">
-                        <p class="text-sm text-white/85">Custom</p>
-                        <p class="font-semibold">Made for You 🎀</p>
-                    </div>
-                    <div class="bg-white/10 border border-white/20 rounded-2xl p-4 backdrop-blur">
-                        <p class="text-sm text-white/85">Quality</p>
-                        <p class="font-semibold">Premium Taste 💎</p>
-                    </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    {{-- WELCOME --}}
-    <section class="bg-gradient-to-b from-pink-50 to-white border-y border-pink-100">
-        <div class="max-w-7xl mx-auto px-6 py-14 md:py-20">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-
-                {{-- Quote --}}
-                <div class="text-center lg:text-left">
-                    <p class="text-3xl md:text-4xl text-pink-800 leading-relaxed"
-                       style="font-family: 'Dancing Script', cursive;">
-                        “Every cake we bake tells a story — of love, joy, and moments worth celebrating.”
-                    </p>
-
-                    <p class="mt-6 text-gray-600 leading-relaxed">
-                        From birthdays to weddings, we make desserts that look stunning and taste unforgettable.
-                        Soft luxury vibes, cute designs, and premium finishes — all in one.
-                    </p>
-
-                    <div class="mt-7 flex gap-3 justify-center lg:justify-start">
-                        <a href="{{ route('products.index') }}"
-                           class="px-6 py-3 rounded-xl bg-pink-500 text-white font-semibold hover:bg-pink-600 transition shadow shadow-pink-500/20">
-                            Explore Products
-                        </a>
-                        <a href="{{ route('about') }}"
-                           class="px-6 py-3 rounded-xl bg-white border border-pink-200 text-pink-700 font-semibold hover:bg-pink-50 transition">
-                            Learn More
-                        </a>
-                    </div>
-                </div>
-
-                {{-- Welcome Card --}}
-                <div class="bg-white rounded-3xl shadow-xl border border-pink-100 p-8 md:p-10">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-2xl bg-pink-100 flex items-center justify-center text-2xl">
-                            🧁
-                        </div>
-                        <h2 class="text-3xl font-extrabold text-pink-800">Welcome to Yummilicious</h2>
-                    </div>
-
-                    <p class="mt-4 text-gray-600">
-                        We create cakes, brownies, cookies and wedding treats with passion,
-                        quality ingredients, and artistic presentation.
-                    </p>
-
-                    <div class="mt-6 grid grid-cols-2 gap-3">
-                        @foreach(['Cakes 🍰','Brownies 🍫','Cookies 🍪','Wedding Treats 💍'] as $item)
-                            <div class="rounded-2xl bg-pink-50 border border-pink-100 px-4 py-3 text-gray-700 font-medium">
-                                {{ $item }}
-                            </div>
-                        @endforeach
-                    </div>
-
-                    <div class="mt-7">
-                        <a href="{{ route('products.index') }}"
-                           class="inline-flex w-full items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold shadow-lg shadow-pink-500/25 hover:opacity-95 transition">
-                            Shop Now
-                            <span class="ml-2">✨</span>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
+        <div class="relative w-full lg:w-1/2 min-h-[50vh] lg:min-h-full">
+            <img src="{{ asset('images/home_hero.jpg') }}" alt="Elegant luxury cake" class="absolute inset-0 w-full h-full object-cover" />
         </div>
     </section>
 
-    {{-- FEATURED PRODUCTS --}}
-    <section class="py-14 md:py-20 bg-white">
+    {{-- WELCOME BANNER --}}
+    <section class="bg-[#FDFBF7] py-20 border-b border-rose-50">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <svg class="w-8 h-8 mx-auto text-rose-300 mb-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+            <h2 class="text-3xl md:text-4xl font-serif-elegant font-semibold text-gray-900 mb-6 flex flex-col items-center leading-snug">
+                “A symphony of flavors, tailored for your most precious moments.”
+            </h2>
+            <p class="font-body-elegant text-gray-500 leading-loose max-w-2xl mx-auto">
+                Welcome to Yummilicious. We believe that every celebration deserves a centerpiece that is as breathtaking as the memories you are creating. Soft luxury vibes, flawless designs, and premium finishes.
+            </p>
+        </div>
+    </section>
+
+    {{-- NEWLY INTRODUCED (Limited to 4, Side-by-Side as designed but more refined) --}}
+    <section class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-pink-800">
-                    Newly Introduced
-                </h2>
-                <p class="mt-3 text-gray-600">
-                    Fresh arrivals — made to impress ✨
-                </p>
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-serif-elegant font-bold text-gray-900">New Arrivals</h2>
+                    <p class="font-body-elegant text-gray-500 mt-4 text-lg">Our latest curated delicacies, baked to perfection.</p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <a href="{{ route('products.index') }}" class="text-sm font-semibold tracking-wider uppercase text-rose-500 hover:text-gray-900 border-b pb-1 border-rose-200 hover:border-gray-900 transition-colors">
+                        View Full Menu
+                    </a>
+                </div>
             </div>
 
-            <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-                @forelse($featuredProducts ?? [] as $product)
-                    <div class="group bg-white rounded-3xl border border-pink-100 shadow-lg overflow-hidden hover:shadow-xl transition">
-                        <div class="relative">
-                            <img
-                                src="{{ $product->image
-                                    ? asset('storage/' . $product->image)
-                                    : 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=900&q=80' }}"
-                                alt="{{ $product->name }}"
-                                class="w-full h-56 object-cover"
-                            />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"></div>
-
-                            <div class="absolute bottom-3 left-3">
-                                <span class="text-xs uppercase tracking-wider bg-white/85 text-pink-700 px-3 py-1 rounded-full">
-                                    {{ $product->category ?? 'Bakery' }}
-                                </span>
-                            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                @forelse(collect($featuredProducts ?? [])->take(4) as $product)
+                    <div class="group flex flex-col sm:flex-row bg-[#FAFAFA] hover:bg-[#FDFBF7] transition-colors duration-500 overflow-hidden border border-gray-100">
+                        <div class="relative sm:w-1/2 overflow-hidden h-72 sm:h-auto">
+                            <img src="{{ $product->image ? asset('storage/' . $product->image) : 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=900&q=80' }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         </div>
-
-                        <div class="p-6 text-center">
-                            <h3 class="font-extrabold text-lg text-gray-800">
+                        <div class="p-8 sm:w-1/2 flex flex-col justify-center">
+                            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-rose-500 mb-3 block">{{ $product->category ?? 'Patisserie' }}</span>
+                            <h3 class="font-serif-elegant text-2xl text-gray-900 mb-3 group-hover:text-rose-900 transition-colors">
                                 {{ $product->name }}
                             </h3>
-
-                            <p class="mt-2 text-pink-700 font-extrabold text-xl">
-                                LKR {{ number_format($product->price ?? 0, 2) }}
+                            <p class="font-body-elegant text-gray-500 text-sm leading-relaxed mb-6">
+                                {{ $product->description ?? 'An exquisite new creation, balancing delicate flavors with an elegant visual presentation.' }}
                             </p>
-
-                            <div class="mt-4">
-                                <livewire:add-to-cart-button
-                                    :product-id="$product->id"
-                                    :stock="$product->stock"
-                                />
-                            </div>
-
-                            <p class="mt-3 text-xs text-gray-500">
-                                Freshly made • Premium finish 💎
+                            <p class="text-gray-900 font-medium tracking-wide">
+                                LKR {{ number_format($product->price ?? 0, 2) }}
                             </p>
                         </div>
                     </div>
                 @empty
-                    {{-- Fallback --}}
+                    {{-- Luxurious Fallback Items (Exactly 4) --}}
                     @foreach([
-                        ['name'=>'Pineapple Cake','price'=>'2400.00'],
-                        ['name'=>'Macarons Box','price'=>'1500.00'],
-                        ['name'=>'Caramel Brownies','price'=>'1200.00'],
+                        ['name'=>'Rose Pistachio Gateau', 'price'=>'2800.00', 'desc'=>'Layers of delicate pistachio sponge infused with pure rose water and light mascarpone cream.', 'img'=>'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80', 'cat'=>'Signature Cake'],
+                        ['name'=>'Vanilla Bean Macarons', 'price'=>'1800.00', 'desc'=>'Classic Parisian macarons filled with rich, whipped Madagascar vanilla bean white chocolate ganache.', 'img'=>'https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=800&q=80', 'cat'=>'Macaron'],
+                        ['name'=>'Dark Cocoa Entremet', 'price'=>'2200.00', 'desc'=>'A mirror-glazed chocolate entremet featuring a crispy praline base and velvety dark chocolate mousse.', 'img'=>'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800&q=80', 'cat'=>'Dessert'],
+                        ['name'=>'Summer Berry Tart', 'price'=>'2100.00', 'desc'=>'An artisanal butter crust enveloping smooth vanilla crème pâtissière, adorned with fresh summer berries.', 'img'=>'https://images.unsplash.com/photo-1519869325930-281384150729?w=800&q=80', 'cat'=>'Tart'],
                     ] as $item)
-                        <div class="bg-pink-50/50 rounded-3xl border border-pink-100 shadow-md p-8 text-center">
-                            <h3 class="font-extrabold text-gray-800">{{ $item['name'] }}</h3>
-                            <p class="text-pink-700 mt-3 font-extrabold text-xl">LKR {{ $item['price'] }}</p>
-                            <a href="{{ route('products.index') }}"
-                               class="mt-5 inline-flex items-center justify-center px-6 py-3 rounded-xl bg-pink-500 text-white font-semibold hover:bg-pink-600 transition">
-                                Order Online
-                            </a>
+                        <div class="group flex flex-col sm:flex-row bg-[#FAFAFA] hover:bg-[#FDFBF7] transition-colors duration-500 overflow-hidden border border-gray-100">
+                             <div class="relative sm:w-1/2 overflow-hidden h-72 sm:h-auto">
+                                 <img src="{{ $item['img'] }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                             </div>
+                             <div class="p-8 sm:w-1/2 flex flex-col justify-center">
+                                 <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-rose-500 mb-3 block">{{ $item['cat'] }}</span>
+                                 <h3 class="font-serif-elegant text-2xl text-gray-900 mb-3 group-hover:text-rose-900 transition-colors">{{ $item['name'] }}</h3>
+                                 <p class="font-body-elegant text-gray-500 text-sm leading-relaxed mb-6">{{ $item['desc'] }}</p>
+                                 <p class="text-gray-900 font-medium tracking-wide">LKR {{ $item['price'] }}</p>
+                             </div>
                         </div>
                     @endforeach
                 @endforelse
@@ -194,130 +106,80 @@
         </div>
     </section>
 
-    {{-- HOW TO ORDER (Premium arrows + numbers) --}}
-    <section class="py-16 md:py-20 bg-pink-50 border-y border-pink-100">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <h2 class="text-4xl md:text-5xl font-extrabold text-pink-800">
-                How to Order
-            </h2>
-            <p class="mt-3 text-gray-600 text-lg">
-                Simple steps to get your treats delivered 💕
-            </p>
-
-            <div class="mt-14 relative grid md:grid-cols-3 gap-8 items-stretch">
-
-                {{-- connector line --}}
-                <div class="hidden md:block absolute top-[72px] left-[12%] right-[12%] h-[3px] bg-gradient-to-r from-pink-200 via-pink-300 to-pink-200 rounded-full"></div>
-
-                {{-- connector arrows --}}
-                <div class="hidden md:block absolute top-[56px] left-[33%] text-pink-400 text-3xl">➜</div>
-                <div class="hidden md:block absolute top-[56px] left-[66%] text-pink-400 text-3xl">➜</div>
-
-                @php
-                    $steps = [
-                        ['num'=>'01','icon'=>'🧁','title'=>'Pick a product','text'=>'Browse cakes, cookies, brownies and more.'],
-                        ['num'=>'02','icon'=>'🛒','title'=>'Add to cart','text'=>'Choose quantity and confirm your order.'],
-                        ['num'=>'03','icon'=>'🚚','title'=>'Get it delivered','text'=>'We prepare fresh and deliver to you.'],
-                    ];
-                @endphp
-
-                @foreach($steps as $s)
-                    <div class="bg-white rounded-3xl shadow-lg border border-pink-100 p-8 hover:shadow-xl transition">
-                        <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center
-                                    bg-gradient-to-r from-pink-500 to-rose-500 text-white
-                                    rounded-full text-xl font-extrabold shadow-md shadow-pink-500/25">
-                            {{ $s['num'] }}
-                        </div>
-
-                        <div class="text-4xl mb-4">{{ $s['icon'] }}</div>
-
-                        <h3 class="text-xl font-extrabold text-gray-800 mb-2">
-                            {{ $s['title'] }}
-                        </h3>
-
-                        <p class="text-gray-600">
-                            {{ $s['text'] }}
-                        </p>
-                    </div>
-                @endforeach
-
+    {{-- HOW TO ORDER (Redesigned: Minimalist, no arrows, pure elegance) --}}
+    <section class="py-24 bg-[#FAFAFA]">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-serif-elegant font-bold text-gray-900">Seamless Experience</h2>
+                <p class="font-body-elegant text-gray-500 mt-4 text-lg">Curated ordering, from our kitchen to your table.</p>
             </div>
 
-            <div class="mt-10">
-                <a href="{{ route('products.index') }}"
-                   class="inline-flex items-center justify-center px-8 py-4 rounded-2xl
-                          bg-gradient-to-r from-pink-500 to-rose-500 text-white font-extrabold
-                          shadow-xl shadow-pink-500/25 hover:opacity-95 transition">
-                    Start Ordering
-                    <span class="ml-2">✨</span>
+            <div class="grid md:grid-cols-3 gap-12 text-center">
+                @foreach([
+                    ['num'=>'I','title'=>'Discover','desc'=>'Explore our meticulously crafted collections online.'],
+                    ['num'=>'II','title'=>'Select','desc'=>'Choose your delicacies and personalize your order.'],
+                    ['num'=>'III','title'=>'Savor','desc'=>'Delivered freshly and flawlessly to your doorstep.'],
+                ] as $step)
+                    <div class="flex flex-col items-center">
+                        <div class="mb-6 h-16 w-16 flex items-center justify-center border border-rose-200 bg-white rounded-full text-xl font-serif-elegant text-rose-800 shadow-sm">
+                            {{ $step['num'] }}
+                        </div>
+                        <h3 class="font-serif-elegant text-2xl text-gray-900 mb-4">{{ $step['title'] }}</h3>
+                        <p class="font-body-elegant text-gray-500 leading-relaxed">{{ $step['desc'] }}</p>
+                    </div>
+                @endforeach
+            </div>
+            
+            <div class="mt-16 text-center">
+                <a href="{{ route('products.index') }}" class="inline-block border-b border-gray-900 pb-1 text-gray-900 font-medium tracking-widest uppercase text-sm hover:text-rose-500 hover:border-rose-500 transition-colors">
+                    Begin Your Order
                 </a>
             </div>
         </div>
     </section>
 
-    {{-- PROMO --}}
-    <section class="py-16 md:py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
-            <div class="relative">
-                <img
-                    src="https://images.unsplash.com/photo-1614707267537-4270a24a62b4?w=1200&q=80"
-                    class="rounded-3xl shadow-xl"
-                    alt="Cupcakes"
-                />
-                <div class="absolute -bottom-5 -left-5 bg-white rounded-3xl shadow-lg border border-pink-100 px-6 py-4">
-                    <p class="text-sm text-gray-500">Limited time</p>
-                    <p class="text-pink-700 font-extrabold text-lg">Fresh batches daily ✨</p>
+    {{-- ELEGANT PROMO --}}
+    <section class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div class="order-2 md:order-1 flex flex-col justify-center">
+                <p class="uppercase tracking-[0.2em] text-[11px] font-bold text-rose-800 mb-4 bg-rose-50 inline-block px-3 py-1 self-start">Gifting Collection</p>
+                <h3 class="text-4xl md:text-5xl font-serif-elegant font-bold text-gray-900 leading-tight mb-6">
+                    Gifts that <br/><span class="text-gray-400 italic">speak volumes</span>
+                </h3>
+                <p class="font-body-elegant text-gray-500 leading-relaxed mb-8 text-lg">
+                    Whether it is a grand celebration or an intimate gesture, our bespoke premium packaging ensures your gift leaves a lasting impression before the first bite.
+                </p>
+                <div>
+                     <a href="{{ route('products.index') }}" class="inline-flex justify-center items-center px-8 py-4 bg-gray-100 text-gray-900 font-medium tracking-wide hover:bg-gray-200 transition-colors rounded-sm">
+                        View Gift Sets
+                    </a>
                 </div>
             </div>
-
-            <div>
-                <h3 class="text-3xl md:text-4xl font-extrabold text-pink-800">
-                    From our oven to your door
-                </h3>
-                <p class="mt-4 text-gray-600 text-lg leading-relaxed">
-                    Order online anytime. We bake with care, pack beautifully, and deliver fresh.
-                </p>
-
-                <div class="mt-7 flex flex-col sm:flex-row gap-3">
-                    <a href="{{ route('products.index') }}"
-                       class="px-8 py-4 rounded-2xl bg-pink-500 text-white font-extrabold hover:bg-pink-600 transition shadow shadow-pink-500/20">
-                        Online Order
-                    </a>
-                    <a href="{{ route('about') }}"
-                       class="px-8 py-4 rounded-2xl bg-white border border-pink-200 text-pink-700 font-extrabold hover:bg-pink-50 transition">
-                        Our Story
-                    </a>
-                </div>
+            <div class="order-1 md:order-2 relative px-4">
+                <div class="absolute inset-0 bg-rose-50 transform translate-x-4 translate-y-4 -z-10 rounded-sm"></div>
+                <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=1000&q=80" class="w-full h-auto object-cover rounded-sm shadow-lg border border-white" alt="Premium packaged treats" />
             </div>
         </div>
     </section>
 
-    {{-- TESTIMONIALS --}}
-    <section class="py-16 md:py-20 bg-gradient-to-b from-white to-pink-50">
+    {{-- TESTIMONIALS (Sophisticated) --}}
+    <section class="py-24 bg-[#FDFBF7]">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-pink-800">
-                    What Our Customers Say
-                </h2>
-                <p class="mt-3 text-gray-600">
-                    Real smiles, real sweetness 💕
-                </p>
-            </div>
-
-            <div class="mt-12 grid md:grid-cols-3 gap-7">
+            <h2 class="text-xs font-bold tracking-[0.2em] uppercase text-rose-500 text-center mb-16">Words of Appreciation</h2>
+            
+            <div class="grid md:grid-cols-3 gap-12">
                 @foreach([
-                    ['name'=>'Amy','text'=>'Fresh and beautifully decorated cakes!'],
-                    ['name'=>'Joel & Maria','text'=>'Perfect wedding cake. Stunning taste.'],
-                    ['name'=>'Valencia','text'=>'Best brownies in town!'],
+                    ['name'=>'A. Sinclair','img'=>'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&q=80','text'=>'The visual presentation was absolutely breathtaking, and the flavor profile exceeded every expectation. True artisans.'],
+                    ['name'=>'J. & M. Kingston','img'=>'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=150&q=80','text'=>'Our wedding cake was a masterpiece. Elegant, flawless, and unforgettable. The attention to detail is remarkable.'],
+                    ['name'=>'V. Laurent','img'=>'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&q=80','text'=>'An indulgence unlike any other. The textures, the subtle sweetness... easily the finest patisserie I have experienced.'],
                 ] as $t)
-                    <div class="bg-white rounded-3xl shadow-lg border border-pink-100 p-7 hover:shadow-xl transition">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-extrabold text-pink-800 text-lg">{{ $t['name'] }}</h3>
-                            <span class="text-2xl">💖</span>
-                        </div>
-                        <p class="mt-3 text-gray-600 italic leading-relaxed">
-                            “{{ $t['text'] }}”
+                    <div class="text-center px-6">
+                        <div class="text-rose-300 text-4xl mb-4 font-serif-elegant">"</div>
+                        <p class="font-body-elegant text-gray-600 italic leading-loose mb-8 text-lg">
+                            {{ $t['text'] }}
                         </p>
+                        <img src="{{ $t['img'] }}" alt="{{ $t['name'] }}" class="w-16 h-16 rounded-full object-cover mx-auto mb-4 border-4 border-rose-50 shadow-sm" />
+                        <h4 class="font-serif-elegant font-semibold text-gray-900 tracking-wide text-xl">{{ $t['name'] }}</h4>
                     </div>
                 @endforeach
             </div>
