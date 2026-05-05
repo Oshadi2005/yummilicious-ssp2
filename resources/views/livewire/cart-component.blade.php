@@ -67,8 +67,8 @@
                 @foreach($this->cartItems as $item)
                     <li class="flex gap-3 rounded-xl bg-white p-2 border border-pink-100 hover:shadow-sm transition">
                         @if(isset($item['product']) && $item['product'] && $item['product']->image)
-                            <img src="{{ asset('storage/' . $item['product']->image) }}"
-                                 alt="{{ $item['product']->name }}"
+                            <img src="{{ Str::startsWith($item['product']->image, 'http') ? $item['product']->image : asset('storage/' . $item['product']->image) }}"
+                                 alt="{{ $item['product']->name ?? 'Product' }}"
                                  class="h-14 w-14 shrink-0 rounded-lg object-cover">
                         @else
                             <div class="h-14 w-14 shrink-0 rounded-lg bg-pink-200 flex items-center justify-center text-pink-800 text-xs font-semibold">

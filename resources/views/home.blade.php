@@ -66,10 +66,10 @@
                 @forelse(collect($featuredProducts ?? [])->take(4) as $product)
                     <div class="group flex flex-col sm:flex-row bg-[#FAFAFA] hover:bg-[#FDFBF7] transition-colors duration-500 overflow-hidden border border-gray-100">
                         <div class="relative sm:w-1/2 overflow-hidden h-72 sm:h-auto">
-                            <img src="{{ $product->image ? asset('storage/' . $product->image) : 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=900&q=80' }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                            <img src="{{ $product->image ? (Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image)) : 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=900&q=80' }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         </div>
                         <div class="p-8 sm:w-1/2 flex flex-col justify-center">
-                            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-rose-500 mb-3 block">{{ $product->category ?? 'Patisserie' }}</span>
+                            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-rose-500 mb-3 block">{{ $product->category->name ?? 'Patisserie' }}</span>
                             <h3 class="font-serif-elegant text-2xl text-gray-900 mb-3 group-hover:text-rose-900 transition-colors">
                                 {{ $product->name }}
                             </h3>

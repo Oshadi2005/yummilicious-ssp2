@@ -22,7 +22,7 @@ class ProductSeeder extends Seeder
                 'price' => 24.99,
                 'category' => 'cakes',
                 'quantity' => 12,
-                'image' => null,
+                'image' => 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&auto=format&fit=crop&q=60',
             ],
             [
                 'name' => 'Vanilla Bean Cupcakes',
@@ -30,7 +30,7 @@ class ProductSeeder extends Seeder
                 'price' => 3.50,
                 'category' => 'cakes',
                 'quantity' => 48,
-                'image' => null,
+                'image' => 'https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=500&auto=format&fit=crop&q=60',
             ],
             [
                 'name' => 'Chocolate Chip Cookies',
@@ -38,7 +38,7 @@ class ProductSeeder extends Seeder
                 'price' => 2.25,
                 'category' => 'cookies',
                 'quantity' => 60,
-                'image' => null,
+                'image' => 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=500&auto=format&fit=crop&q=60',
             ],
             [
                 'name' => 'Oatmeal Raisin Cookies',
@@ -46,7 +46,7 @@ class ProductSeeder extends Seeder
                 'price' => 2.50,
                 'category' => 'cookies',
                 'quantity' => 40,
-                'image' => null,
+                'image' => 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=500&auto=format&fit=crop&q=60',
             ],
             [
                 'name' => 'Butter Croissant',
@@ -54,7 +54,7 @@ class ProductSeeder extends Seeder
                 'price' => 4.00,
                 'category' => 'pastries',
                 'quantity' => 30,
-                'image' => null,
+                'image' => 'https://images.unsplash.com/photo-1549903072-7e6e0bedb7fb?w=500&auto=format&fit=crop&q=60',
             ],
             [
                 'name' => 'Apple Turnover',
@@ -62,12 +62,18 @@ class ProductSeeder extends Seeder
                 'price' => 4.50,
                 'category' => 'pastries',
                 'quantity' => 20,
-                'image' => null,
+                'image' => 'https://images.unsplash.com/photo-1601000938259-9e92002320b2?w=500&auto=format&fit=crop&q=60',
             ],
         ];
 
-        foreach ($products as $product) {
-            Product::create($product);
+        foreach ($products as $productData) {
+            $categoryName = $productData['category'];
+            $category = \App\Models\Category::firstOrCreate(['name' => $categoryName]);
+
+            unset($productData['category']);
+            $productData['category_id'] = $category->id;
+
+            Product::create($productData);
         }
     }
 }

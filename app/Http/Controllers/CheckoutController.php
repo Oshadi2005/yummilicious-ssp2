@@ -60,7 +60,31 @@ class CheckoutController extends Controller
             return back()->with('error', 'Your cart is empty.');
         }
 
-        $orderRef = 'ORD-' . now()->format('Ymd-His');
+        // Calculate total
+        $products = Product::whereIn('id', array_keys($cart))->get()->keyBy('id');
+        $subtotal = 0;
+        foreach ($cart as $id => $qty) {
+            $product = $products->get($id);
+            if ($product) {
+                $subtotal += (float) $product->price * (int) $qty;
+            }
+        }
+        $delivery = $subtotal > 0 ? 300 : 0;
+        $total = $subtotal + $delivery;
+
+        // Save to Database
+        $order = \App\Models\Order::create([
+            'user_id' => auth()->id(),
+            'total' => $total,
+            'status' => 'pending',
+        ]);
+
+        // Attach products with quantity to pivot table
+        foreach ($cart as $id => $qty) {
+            $order->products()->attach($id, ['quantity' => $qty]);
+        }
+
+        $orderRef = 'ORD-' . str_pad($order->id, 4, '0', STR_PAD_LEFT) . '-' . now()->format('His');
 
         session([
             'last_order' => [

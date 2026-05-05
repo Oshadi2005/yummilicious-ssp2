@@ -10,8 +10,8 @@ class Product extends Model
         'name',
         'description',
         'price',
-        'category',
-        'quantity',   // ✅ use quantity (not stock)
+        'category_id', // Changed from 'category'
+        'quantity',    // ✅ use quantity (not stock)
         'sold',
         'image',
     ];
@@ -21,4 +21,9 @@ class Product extends Model
         'quantity' => 'integer',
         'sold' => 'integer',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

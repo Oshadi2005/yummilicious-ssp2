@@ -40,9 +40,14 @@
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Category</label>
-                <input type="text" name="category" value="{{ old('category', $product->category) }}"
-                       class="w-full rounded-lg border-gray-300 focus:border-pink-400 focus:ring-pink-300"
-                       required>
+                <select name="category_id" class="w-full rounded-lg border-gray-300 focus:border-pink-400 focus:ring-pink-300" required>
+                    <option value="" disabled>Select a category</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -64,8 +69,8 @@
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Current Image</label>
-                @if($product->image && Storage::disk('public')->exists($product->image))
-                    <img src="{{ asset('storage/'.$product->image) }}"
+                @if($product->image)
+                    <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/'.$product->image) }}"
                          class="h-24 w-24 rounded-lg object-cover border mb-3" alt="Product image">
                 @else
                     <p class="text-sm text-gray-500 mb-3">No image uploaded</p>

@@ -18,20 +18,20 @@ class DatabaseSeeder extends Seeder
     {
         // Create a test customer
         User::updateOrCreate(
-            ['email' => 'test@example.com'],
+            ['email' => 'sharankumaravel@gmail.com'],
             [
-                'name' => 'Test User',
-                'password' => Hash::make('password'),
+                'name' => 'Sharan',
+                'password' => Hash::make('Oshadi#123#'),
                 'role' => 'customer',
             ]
         );
 
         // Create the admin user
         User::updateOrCreate(
-            ['email' => 'admin@gmail.com'],
+            ['email' => 'oshadikumaravel@gmail.com'],
             [
-                'name' => 'Admin',
-                'password' => Hash::make('password'),
+                'name' => 'Oshadi Admin',
+                'password' => Hash::make('SHARAN#123#'),
                 'role' => 'admin',
             ]
         );

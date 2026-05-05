@@ -39,9 +39,14 @@
 
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Category</label>
-                    <input type="text" name="category" value="{{ old('category') }}"
-                           class="w-full rounded-lg border-gray-300 focus:border-pink-400 focus:ring-pink-300"
-                           placeholder="Cookies" required>
+                    <select name="category_id" class="w-full rounded-lg border-gray-300 focus:border-pink-400 focus:ring-pink-300" required>
+                        <option value="" disabled {{ old('category_id') ? '' : 'selected' }}>Select a category</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">

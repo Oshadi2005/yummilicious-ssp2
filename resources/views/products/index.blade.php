@@ -32,7 +32,7 @@
                             <!-- Product Image -->
                             <div class="relative w-full h-80 overflow-hidden mb-6 bg-[#FAFAFA] border border-gray-100">
                                 @if ($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}" 
+                                    <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image) }}" 
                                          alt="{{ $product->name }}" 
                                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                                 @else
@@ -48,18 +48,17 @@
 
                             <!-- Product Info -->
                             <div class="flex-1 flex flex-col text-center px-4">
-                                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-rose-400 mb-3">{{ $product->category ?? 'Delicacy' }}</span>
+                                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-rose-400 mb-3">{{ $product->category->name ?? 'Delicacy' }}</span>
                                 <h3 class="font-serif-elegant text-2xl text-gray-900 mb-3">{{ $product->name }}</h3>
                                 <p class="font-body-elegant text-gray-500 text-sm mb-6 flex-1 leading-relaxed">
                                     {{ Str::limit($product->description ?? 'Expertly crafted with premium ingredients for a delightful experience.', 60) }}
                                 </p>
                                 
-                                <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-6 font-semibold">Stock: {{ $product->stock }}</p>
+                                <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-6 font-semibold">Stock: {{ $product->quantity }}</p>
 
                                 <div class="mt-auto w-full [&>button]:!w-full [&>button]:!py-3 [&>button]:!rounded-none [&>button]:!bg-gray-900 [&>button]:hover:!bg-rose-900 [&>button]:!transition-colors [&>button]:!duration-500 [&>button]:!text-[11px] [&>button]:!uppercase [&>button]:!tracking-[0.2em] [&>button]:!font-bold">
                                     <livewire:add-to-cart-button 
                                         :product-id="$product->id" 
-                                        :stock="$product->stock"
                                         :wire:key="'product-'.$product->id" />
                                 </div>
                             </div>

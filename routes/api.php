@@ -65,12 +65,12 @@ Route::middleware('auth:sanctum')->group(function () {
         ]);
     })->name('api.user');
 
-    // Get authenticated user's orders (placeholder)
+    // Get authenticated user's orders
     Route::get('/user/orders', function (Request $request) {
         return response()->json([
-            'message' => 'User orders - authenticated user only',
+            'message' => 'User orders retrieved successfully',
             'user_id' => $request->user()->id,
-            'orders' => [], // You can replace with real orders from Order model later
+            'orders' => $request->user()->orders()->with('products')->get(),
         ]);
     })->name('api.user.orders');
 });

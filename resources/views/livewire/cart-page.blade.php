@@ -15,7 +15,7 @@
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 rounded-xl border border-pink-100 bg-pink-50 p-4">
                     <div class="flex items-center gap-4">
                         @if($item['product']->image)
-                            <img src="{{ asset('storage/' . $item['product']->image) }}"
+                            <img src="{{ Str::startsWith($item['product']->image, 'http') ? $item['product']->image : asset('storage/' . $item['product']->image) }}"
                                  class="h-16 w-16 rounded-lg object-cover"
                                  alt="{{ $item['product']->name }}">
                         @else

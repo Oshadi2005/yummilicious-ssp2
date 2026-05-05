@@ -32,15 +32,15 @@
                 @forelse($products as $product)
                     <tr class="border-t">
                         <td class="p-4">
-                            @if($product->image && Storage::disk('public')->exists($product->image))
-                                <img src="{{ asset('storage/'.$product->image) }}"
-                                     class="h-12 w-12 rounded-lg object-cover" />
+                            @if($product->image)
+                                <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset('storage/'.$product->image) }}"
+                                     class="h-10 w-10 rounded-full object-cover" alt="">
                             @else
                                 <div class="h-12 w-12 rounded-lg bg-gray-100 flex items-center justify-center text-xs text-gray-500">No</div>
                             @endif
                         </td>
                         <td class="p-4 font-semibold">{{ $product->name }}</td>
-                        <td class="p-4">{{ $product->category }}</td>
+                        <td class="p-4">{{ $product->category->name ?? 'N/A' }}</td>
                         <td class="p-4 font-bold text-pink-700">LKR {{ number_format($product->price, 2) }}</td>
                         <td class="p-4">{{ $product->quantity }}</td>
                         <td class="p-4 flex gap-2">
