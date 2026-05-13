@@ -20,4 +20,4 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts --ignore-platfo
 
 EXPOSE 10000
 
-CMD php artisan package:discover && php artisan serve --host=0.0.0.0 --port=10000
+CMD touch database/database.sqlite && php artisan migrate --seed --force && php artisan package:discover && php artisan serve --host=0.0.0.0 --port=10000
